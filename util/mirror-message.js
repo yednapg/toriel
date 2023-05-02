@@ -5,7 +5,7 @@ async function mirrorMessage({ message, user, channel, type }) {
   try {
     const context = `a ${type} from <@${user}> in <#${channel}>`
     await client.chat.postMessage({
-      channel: transcript('channels.toriels-diary'),
+      channel: transcript('channels.arv-tor'),
       text: context,
       blocks: [
         {

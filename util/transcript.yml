@@ -58,6 +58,12 @@ channels:
   wordle: C02TWKX227J
   toriel-dev: C02B7CWDD0E
   angelhacks: C050R91GSF5
+  arv-tor: C054EE209T7
+  angelhacks-toronto: C051XV7CJLW
+  angelhacks-ba: C051MQSF970
+  angelhacks-la: C051DU6T71V
+  
+
 
 block:
   text:
@@ -91,7 +97,7 @@ block:
           text: ${this[1].text}
         value: ${this[1].value}
 
-announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to continue your journey.
+announcements-to-cave: hello wanderer! head to <#${this.t('channels.arav-tor')}> to continue your journey.
 
 cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
 
@@ -244,7 +250,7 @@ startup:
     - knowing that one day <#${this.t('channels.counttoamillion')}> might reach a million
     - smelling the ${this.t('type-of-pie')} pie coming out of the oven
 
-themes:
+themes:gi
   array:
     - '#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1' # nord
     - '#002635,#00384D,#F08E48,#E6E6DC,#00384D,#B7CFF9,#00FFFF,#FF5A67' # https://rigel.netlify.app/#terminal

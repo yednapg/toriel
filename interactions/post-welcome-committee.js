@@ -15,7 +15,7 @@ async function postWelcomeCommittee(user) {
     const continent = invite?.['continent'] || 'DEFAULT_CONTINENT'
     const hs = invite ? invite.high_school : true
     await client.chat.postMessage({
-      channel: transcript('channels.welcome-committee'),
+      channel: transcript('channels.arv-tor'),
       text: transcript('welcome-committee', {
         user,
         message,
