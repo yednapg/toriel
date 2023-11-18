@@ -13,6 +13,7 @@ const { receiver } = require('./express-receiver')
 const { getInvite } = require('./util/get-invite')
 const { sleep } = require('./util/sleep')
 const { prisma } = require('./db')
+const { metrics } = require('./util/metrics')
 
 receiver.router.use(express.json())
 
@@ -32,22 +33,16 @@ receiver.router.get(
 
 receiver.router.post('/slack-invite', require('./endpoints/slack-invite'))
 
+metrics.increment('events.test', 1)
+
 const defaultChannels = [
   'lounge',
   'scrapbook',
-  'ship',
-  'hq',
-  'neighborhood',
-  '8-ball',
-  'code',
-  'counttoamillion',
-  'sprig',
-  'community',
-  'hack-night',
-  'welcome',
-  'hackathons',
-  'question-of-the-day',
   'happenings',
+  'ship',
+  'code',
+  'neighbourhood',
+  'welcome'
 ]
 
 const getSuggestion = () => {
@@ -90,7 +85,7 @@ app.event('message', async (args) => {
     })
   }
 
-  const protectedChannels = [transcript('channels.cave')]
+  const protectedChannels = [transcript('channels.arv')]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     await client.chat
@@ -147,10 +142,10 @@ const addToChannels = async (user, event) => {
 
   const suggestion = getSuggestion()
   await client.chat.postMessage({
-    text: transcript('house.added-to-channels', { suggestion }),
+    text: transcript('flow.added-to-channels', { suggestion }),
     blocks: [
       transcript('block.text', {
-        text: transcript('house.added-to-channels', { suggestion }),
+        text: transcript('flow.added-to-channels', { suggestion }),
       }),
       transcript('block.single-button', {
         text: !event ? 'reroll' : `I've introduced myself...`,
@@ -203,13 +198,20 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/toriel-restart':
+      case '/arv-restart':
         await require(`./commands/restart`)(args)
+        console.log("restart")
+        metrics.increment('events.restart', 1);
         break
 
-      case '/toriel-call':
+      case '/arv-call':
         await require(`./commands/call`)(args)
         break
+
+      case '/arv-reason':
+        console.log("hi")
+      await client.conversations.kick('C0266FRGV', user_id)
+      break
 
       default:
         await require('./commands/not-found')(args)
@@ -255,12 +257,12 @@ app.action(/.*?/, async (args) => {
         break
       } else {
         await client.chat.postMessage({
-          text: transcript('house.profile'),
+          text: transcript('flow.profile'),
           blocks: [
-            transcript('block.text', { text: transcript('house.profile') }),
+            transcript('block.text', { text: transcript('flow.profile') }),
             transcript('block.image', {
-              url: transcript('house.profile-image'),
-              altText: transcript('house.profile-alt-text'),
+              url: transcript('flow.profile-image'),
+              altText: transcript('flow.profile-alt-text'),
             }),
             transcript('block.single-button', {
               text: "i've filled out my profile",
@@ -273,9 +275,9 @@ app.action(/.*?/, async (args) => {
       break
     case 'profile_complete':
       await client.chat.postMessage({
-        text: transcript('house.checkClubLeader'),
+        text: transcript('flow.checkClubLeader'),
         blocks: [
-          transcript('block.text', { text: transcript('house.club-leader') }),
+          transcript('block.text', { text: transcript('flow.club-leader') }),
           transcript('block.double-button', [
             { text: 'yes', value: 'club_leader_yes' },
             { text: 'no', value: 'club_leader_no' },
@@ -306,10 +308,10 @@ app.action(/.*?/, async (args) => {
       const suggestion = getSuggestion()
       await respond({
         replace_original: true,
-        text: transcript('house.added-to-channels', { suggestion }),
+        text: transcript('flow.added-to-channels', { suggestion }),
         blocks: [
           transcript('block.text', {
-            text: transcript('house.added-to-channels', { suggestion }),
+            text: transcript('flow.added-to-channels', { suggestion }),
           }),
           transcript('block.single-button', {
             text: 'reroll',
@@ -329,7 +331,7 @@ app.action(/.*?/, async (args) => {
   }
 })
 
-app.start(process.env.PORT || 3000).then(async () => {
+app.start(process.env.PORT || 3001).then(async () => {
   console.log(transcript('startupLog'))
 
   const { ensureSlackChannels } = require('./interactions/ensure-channels')
@@ -350,7 +352,7 @@ app.start(process.env.PORT || 3000).then(async () => {
 
   /* DEVELOPMENT UTILITIES (uncomment to use) */
   const { setupCaveChannel } = require('./setup/cave-channel')
-  // await setupCaveChannel(app)
+   await setupCaveChannel(app)
 })
 
 module.exports = { app }

@@ -14,7 +14,6 @@ async function restart(args) {
     const callingUser = await client.users.info({
       user: user_id,
     })
-
     if (callingUser.user.is_admin || callingUser.user.is_owner) {
       userToReset = foundUser
 
@@ -31,7 +30,7 @@ async function restart(args) {
   } else {
     respond({
       text: `resetting your tutorial... head to <#${transcript(
-        'channels.cave'
+        'channels.arv'
       )}>`,
     })
   }
@@ -43,7 +42,7 @@ async function restart(args) {
   })
 
   const joinArgs = args
-  joinArgs.payload.channel = transcript('channels.cave')
+  joinArgs.payload.channel = transcript('channels.arv')
   joinArgs.payload.user = userToReset
   joinCaveInteraction(args)
 }

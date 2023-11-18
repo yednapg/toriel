@@ -25,7 +25,9 @@ channels:
   community: C01D7AHKMPF
   confessions: CNMU9L92Q
   counttoamillion: CDJMS683D
+  arv: C05EJUG9Y6S
   epoch: C044SRZR8MB
+  toriel-playground: C05UDMBH9HU
   gamedev: C6LHL48G2
   hackathon-organizers: C03QSGGCJN7
   hackathons: C0NP503L7
@@ -93,32 +95,26 @@ block:
           text: ${this[1].text}
         value: ${this[1].value}
 
-announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to continue your journey.
+announcements-to-cave: hello wanderer! head to <#${this.t('channels.arv')}> to continue your journey.
 
-cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
+cave-intro: |
+  Hi, welcome to Hack Club’s online community! 
+  Click start below this message to get inside!  
+  If you encounter any problems or need help, send a message in #waiting-room.
+
 
 cave-join: |
   oh hello... i don't think i recognize you; you must be new in town.
   you may call me <@${this.t('selfUserID')}>! i have tea and a fresh ${this.t('type-of-pie')} pie cooling off... please come over.
 
-  i just sent you a dm! you can tell by the :ping: to the left.
+  i just sent you a dm! you can tell by the :ping: to the left (it should be on your sidebar, under apps!)
 
-house:
+flow:
   coc: |
-    hello, my child. please take some tea to calm your nerves.
-    i must ask that you read this before gaining access to the rest of the slack:
-
-    _TORIEL points to a page in a book laid out in front of you_
-    > The tenants of the Hack Club Slack (Abridged 12th ed.) Orpheus et al.
-
-    > Treat everyone with respect and kindness.
-    > Be thoughtful in how you communicate.
-    > Don't advertise outside of \`#​present\`.
-    > Above all else, please follow the *<https://hackclub.com/conduct/#hacker-values|Hacker Values>*.
-
-    _as you close the book, you see a link on its binding: https://conduct.hackclub.com._
-
-    do you agree to abide by the code of conduct?
+   Hack Club's online community is built on kindness and respect
+    
+    Please take a momment to read our code of conduct.
+    > code of conduct goes here
   profile: |
     and with that — welcome to hack club, an incredible community of teenage programmers across the world!
 
@@ -211,7 +207,7 @@ command:
     - |
       📞 This is <@${this.t('selfUserID')}>.
       Are you bored?
-      We could paint the walls at my house ${this.t('themes.array')}
+      We could paint the walls at my flow ${this.t('themes.array')}
       Or, if you prefer another color, you can find one for yourself in <#${this.t('channels.slack-themes')}>
     - |
       📞 This is <@${this.t('selfUserID')}>.

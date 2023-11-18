@@ -22,7 +22,7 @@ async function joinCaveInteraction(args) {
   await Promise.all([
     client.chat.postEphemeral({
       text: transcript('cave-join', { user }),
-      channel: transcript('channels.cave'),
+      channel: transcript('channels.arv'),
       user,
     }),
   ])
@@ -30,10 +30,10 @@ async function joinCaveInteraction(args) {
   await Promise.all([
     await sleep(1000),
     await client.chat.postMessage({
-      text: transcript('house.coc'),
+      text: transcript('flow.coc'),
       blocks: [
         transcript('block.text', {
-          text: transcript('house.coc'),
+          text: transcript('flow.coc'),
         }),
         transcript('block.single-button', {
           text: 'i agree',
