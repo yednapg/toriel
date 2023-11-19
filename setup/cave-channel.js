@@ -1,37 +1,25 @@
 const axios = require('axios')
 const { transcript } = require('../util/transcript')
 const { client } = require('../app')
+const { metrics } = require('../util/metrics')
 
 async function setupCaveChannel() {
-  await postImage()
-  // await postAudio()
   await postMessage()
 }
 
-async function postImage() {
-  const file = await axios({
-    method: 'get',
-    url: transcript('files.cave-image'),
-    responseType: 'stream',
-  })
-  const response = await client.files.upload({
-    channels: transcript('channels.toriel-playground'),
-    file: file.data,
-    filename: 'you fall into a cave...',
-    filetype: 'png',
-  })
-}
+
 
 async function postMessage() {
+  metrics.increment('events.cavestart', 1)
   client.chat.postMessage({
     channel: transcript('channels.toriel-playground'),
-    text: transcript('cave-intro'),
+    text: transcript('slack-intro'),
     icon_url: transcript('avatar.log'),
     blocks: [
-      transcript('block.text', { text: transcript('cave-intro') }),
+      transcript('block.text', { text: transcript('slack-intro') }),
       transcript('block.single-button', {
         text: 'Start!',
-        value: 'cave_start',
+        value: 'flow_start',
       }),
     ],
   })

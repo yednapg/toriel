@@ -236,9 +236,9 @@ app.action(/.*?/, async (args) => {
   await ack()
 
   switch (payload.value) {
-    case 'cave_start':
-      const { joinCaveInteraction } = require('./interactions/join-cave')
-      await joinCaveInteraction({ ...args, payload: { user } })
+    case 'flow_start':
+      const { joinSlackInteraction } = require('./interactions/join-slack-channel')
+      await joinSlackInteraction({ ...args, payload: { user } })
       break
     case 'coc_complete':
       const slackuser = await client.users.info({ user })
@@ -254,8 +254,7 @@ app.action(/.*?/, async (args) => {
           data: { club_leader: false },
         })
         await addToChannels(user, event)
-        break
-      } else {
+        await sleep(1000);
         await client.chat.postMessage({
           text: transcript('flow.profile'),
           blocks: [
@@ -318,8 +317,9 @@ app.action(/.*?/, async (args) => {
             value: 'reroll',
           }),
         ],
-        unfurl_links: false,
+        unfurl_links: true,
       })
+      metrics.increment('events.caveend', 1)
       break
     default:
       await respond({

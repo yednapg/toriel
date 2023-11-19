@@ -1,4 +1,4 @@
-const { joinCaveInteraction } = require('../interactions/join-cave')
+const { joinSlackInteraction } = require('../interactions/join-slack-channel')
 const { transcript } = require('../util/transcript')
 
 async function restart(args) {
@@ -44,6 +44,6 @@ async function restart(args) {
   const joinArgs = args
   joinArgs.payload.channel = transcript('channels.arv')
   joinArgs.payload.user = userToReset
-  joinCaveInteraction(args)
+  joinSlackInteraction(args)
 }
 module.exports = restart

@@ -97,9 +97,11 @@ block:
 
 announcements-to-cave: hello wanderer! head to <#${this.t('channels.arv')}> to continue your journey.
 
-cave-intro: |
+slack-intro: |
   Hi, welcome to Hack Club’s online community! 
-  Click start below this message to get inside!  
+  
+  Click start below this message to get inside!
+  
   If you encounter any problems or need help, send a message in #waiting-room.
 
 
@@ -128,19 +130,19 @@ flow:
     to do this, click on your profile picture in the upper right, then click _Profile_, then click _Edit_ next to anything you'd like to add or change:
   profile-image: https://cloud-7847qp310-hack-club-bot.vercel.app/0screen_shot_2022-08-01_at_08.23.55.png
   profile-alt-text: a screenshot of the button leading to the user menu
-  club-leader: |
-    are you joining the slack because you're either currently running or considering running a hack club at your school?
-
-    (it's ok if not — this is so i can direct you to the right channels)
+  
+    (it's ok if not  is so i can direct you to the right channels)
   added-to-channels: |
-    i’ve now added you to some channels you might like; feel free to poke around. here’s an overview if you feel lost or overwhelmed:
+    There are *TONS* of channels here! you’re welcome to join any or all of them! To start, we added you tor these:
+  
+    - <#${this.t('channels.lounge')}> - It’s like our living room, it’s Discord’s ‘general
+    -  <#${this.t('channels.happenings')}> - keep up to date on Hack Club’s events and activities
+  
+  
+  
+  
 
-    <#${this.t('channels.announcements')}> <#${this.t('channels.community')}> <#${this.t('channels.hq')}> are the places where new activities and events are announced
-
-    <#${this.t('channels.scrapbook')}> <#${this.t('channels.ship')}> are the places to see what hack clubbers are making and to showcase your own projects
-
-    to meet hack clubbers running hackathons and get help running your own: <#${this.t('channels.hackathon-organizers')}>
-
+  projects: |
     active hack club projects you can check out or help build:
     • Keep updated with all the events & activtes happening inside the slack every week at <#${this.t('channels.happenings')}>
     • we’re building <https://sinerider.hackclub.dev|sinerider>, a game about love and graphing, at <#${this.t('channels.gamedev')}>
@@ -155,10 +157,7 @@ flow:
     if that’s still too much, perhaps you’ll find one of my suggestions useful:
 
     > ${this.suggestion}
-  added-to-channels-epoch: |
-    <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
-
-    i’ve also added you to some other channels you might like. feel free to poke around and get your fellow hackers!
+    
 
 club-leader:
   text: 'a new club leader has joined: <@${this.user}>'

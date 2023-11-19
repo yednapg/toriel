@@ -4,7 +4,7 @@ const { transcript } = require('../util/transcript')
 const { prisma } = require('../db')
 const { getEmailFromUser } = require('../util/get-invite')
 
-async function joinCaveInteraction(args) {
+async function joinSlackInteraction(args) {
   const { client, payload } = args
   const { user } = payload
 
@@ -46,4 +46,4 @@ async function joinCaveInteraction(args) {
     }),
   ])
 }
-module.exports = { joinCaveInteraction }
+module.exports = { joinSlackInteraction }

@@ -1,6 +1,6 @@
 const { prisma } = require('../db')
 const { transcript } = require('../util/transcript')
-const { joinCaveInteraction } = require('../interactions/join-cave')
+const { joinSlackInteraction } = require('../interactions/join-slack-channel')
 
 async function reason(args) {
   console.log("reason")
